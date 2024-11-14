@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체크박스 그룹 예시</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            padding: 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .title {
+            text-align: center;
+            font-size: 2em;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .table-box {
+            background-color: #ffffff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1em;
+            color: #333;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333;
+            border-radius: 3px;
+            margin-right: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        input[type="checkbox"]:checked::after {
+            content: '✔';
+            font-size: 16px;
+            color: #00796b;
+            position: absolute;
+            top: -2px;
+            left: 3px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #capture {
+            background-color: #ffcc80;
+        }
+        #reset {
+            background-color: #ef5350;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 제목 -->
+    <div class="title">
+        이 트친은/을/과
+    </div>
+
+    <div class="container" id="content">
+        <!-- 첫 번째 그룹 -->
+        <div class="table-box">
+            <h3>이 트친은</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> 귀엽다</label>
+                <label><input type="checkbox"> 예쁘다</label>
+                <label><input type="checkbox"> 멋있다</label>
+                <label><input type="checkbox"> 아름답다</label>
+                <label><input type="checkbox"> 기품 있다</label>
+                <label><input type="checkbox"> 발랄하다</label>
+                <label><input type="checkbox"> 활발하다</label>
+                <label><input type="checkbox"> 조용하다</label>
+                <label><input type="checkbox"> 츤데레다</label>
+            </div>
+        </div>
+
+        <!-- 두 번째 그룹 -->
+        <div class="table-box">
+            <h3>이 트친을</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> 좋아한다</label>
+                <label><input type="checkbox"> 납치하고 싶다</label>
+                <label><input type="checkbox"> 아낀다</label>
+                <label><input type="checkbox"> 만나고 싶다</label>
+                <label><input type="checkbox"> 때리고 싶다</label>
+                <label><input type="checkbox"> 오랜만에 본다</label>
+                <label><input type="checkbox"> 자주 생각한다</label>
+                <label><input type="checkbox"> 1년 이상 알았다</label>
+                <label><input type="checkbox"> 잘 모른다</label>
+            </div>
+        </div>
+
+        <!-- 세 번째 그룹 -->
+        <div class="table-box">
+            <h3>이 트친과</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox"> 밥 먹고 싶다</label>
+                <label><input type="checkbox"> 통화하고 싶다</label>
+                <label><input type="checkbox"> 대화하고 싶다</label>
+                <label><input type="checkbox"> 게임하고 싶다</label>
+                <label><input type="checkbox"> 술 마시고 싶다</label>
+                <label><input type="checkbox"> 동거하고 싶다</label>
+                <label><input type="checkbox"> 노래하고 싶다</label>
+                <label><input type="checkbox"> 일하고 싶다</label>
+                <label><input type="checkbox"> 놀고 싶다</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 버튼 컨테이너 -->
+    <div class="button-container">
+        <button id="capture">캡처</button>
+        <button id="reset">리셋</button>
+    </div>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <script>
+        // 리셋 버튼 기능
+        document.getElementById('reset').addEventListener('click', function() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
+        });
+
+        // 캡처 버튼 기능
+        document.getElementById('capture').addEventListener('click', function() {
+            html2canvas(document.getElementById('content')).then(function(canvas) {
+                let link = document.createElement('a');
+                link.download = 'capture.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
+
+    <!-- html2canvas 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
